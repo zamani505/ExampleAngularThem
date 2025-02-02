@@ -1,0 +1,114 @@
+<div class="inner">
+  <div class="dpk-authpage__body">
+    <form (ngSubmit)="onSubmit()" [formGroup]="agentForm">
+      <div class="p-fluid p-formgrid p-grid">
+        <div class="p-field p-col-12">
+          <label>نام</label>
+          <input dpkpInputText formControlName="name" />
+          <dpk-validation-error
+            [minlength]="2"
+            [maxlength]="30"
+            [control]="agentForm.controls['name']"
+            [name]="'نام'"
+          >
+          </dpk-validation-error>
+        </div>
+
+        <div class="p-field p-col-12">
+          <label>نام خانوادگی</label>
+          <input dpkpInputText formControlName="lastName" />
+          <dpk-validation-error
+            [maxlength]="70"
+            [minlength]="2"
+            [control]="agentForm.controls['lastName']"
+            [name]="'نام خانوادگی'"
+          >
+          </dpk-validation-error>
+        </div>
+
+        <div class="p-field p-col-12">
+          <label>شماره همراه</label>
+          <input
+            dpkpInputText
+            digitOnly
+            [maxlength]="11"
+            formControlName="mobile"
+          />
+          <dpk-validation-error
+            [minlength]="11"
+            [control]="agentForm.controls['mobile']"
+            [name]="'شماره همراه'"
+          >
+          </dpk-validation-error>
+        </div>
+
+        <div class="p-field p-col-12">
+          <label class="optional">پست الکترونیکی نماینده</label>
+          <input
+            dpkpInputText
+            formControlName="agentEmail"
+            type="email"
+            name="agentEmail"
+            [email]="true"
+          />
+          <dpk-validation-error
+            [control]="agentForm.controls['agentEmail']"
+            [name]="'پست الکترونیکی'"
+          >
+          </dpk-validation-error>
+        </div>
+
+        <div class="p-field p-col-12">
+          <label>پست الکترونیکی شرکت</label>
+          <input
+            dpkpInputText
+            formControlName="legalEmail"
+            type="email"
+            name="legalEmail"
+            [email]="true"
+          />
+          <dpk-validation-error
+            [control]="agentForm.controls['legalEmail']"
+            [name]="'پست الکترونیکی شرکت'"
+          >
+          </dpk-validation-error>
+        </div>
+
+        <div class="p-field p-col-12">
+          <label>انتخاب شعبه</label>
+          <dpk-p-dropdown
+            [options]="branches"
+            [emptyFilterMessage]="'شعبه ای یافت نشد ...'"
+            [filter]="true"
+            [optionValue]="'id'"
+            formControlName="branchId"
+            optionLabel="title"
+            [showClear]="true"
+            placeholder="انتخاب کنید"
+          >
+          </dpk-p-dropdown>
+        </div>
+      </div>
+
+      <div class="p-fluid p-formgrid p-grid p-mt-4">
+        <div class="p-field p-col-12 p-md-6">
+          <button
+            [disabled]="!agentForm.valid"
+            [loading]="loadingSubmitBtn"
+            dpkpButton
+            type="submit"
+            label="ثبت و ادامه"
+          ></button>
+        </div>
+        <div class="p-field p-col-12 p-md-6">
+          <button
+            class="p-button-outlined"
+            (click)="onRouteToRegister()"
+            dpkpButton
+            label="بازگشت"
+          ></button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

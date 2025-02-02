@@ -1,0 +1,511 @@
+@charset "UTF-8";
+
+// Variables
+$dpkPrefix: ".dpk-";
+$iranSansFontPath: "../fonts/IRANSans";
+$baseTextColor: #000;
+$baseFontSize: .8125rem;
+$linkColor: #007acc;
+$linkHoverColor: #0989e0;
+$field-margin-bottom: 1rem;
+
+$primaryTextColor: #fff;
+$primaryColor: #007ad9;
+$primaryDarkColor: #116fbf;
+$primaryDarkerColor: #005b9f;
+$textColor: #333;
+$focusOutlineColor: #8dcdff;
+$textSecondaryColor: #848484;
+$borderRadius: 3px;
+$highlightBg: #3b82f6;
+$highlightTextColor: #fff;
+$errorColor: #e4677e;
+$panelContentBg: #fff;
+$panelHeaderTextColor: #333;
+
+// Font Definitions
+@font-face {
+  font-family: IRANSans;
+  font-style: normal;
+  font-weight: bold;
+  src: url('#{$iranSansFontPath}/IRANSansWeb_Bold.eot');
+  src: url('#{$iranSansFontPath}/IRANSansWeb_Bold.eot?#iefix') format('embedded-opentype'),
+    url('#{$iranSansFontPath}/IRANSansWeb_Bold.woff2') format('woff2'),
+    url('#{$iranSansFontPath}/IRANSansWeb_Bold.woff') format('woff'),
+    url('#{$iranSansFontPath}/IRANSansWeb_Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: IRANSans;
+  font-style: normal;
+  font-weight: 500;
+  src: url('#{$iranSansFontPath}/IRANSansWeb_Medium.eot');
+  src: url('#{$iranSansFontPath}/IRANSansWeb_Medium.eot?#iefix') format('embedded-opentype'),
+    url('#{$iranSansFontPath}/IRANSansWeb_Medium.woff2') format('woff2'),
+    url('#{$iranSansFontPath}/IRANSansWeb_Medium.woff') format('woff'),
+    url('#{$iranSansFontPath}/IRANSansWeb_Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: IRANSans;
+  font-style: normal;
+  font-weight: 300;
+  src: url('#{$iranSansFontPath}/IRANSansWeb_Light.eot');
+  src: url('#{$iranSansFontPath}/IRANSansWeb_Light.eot?#iefix') format('embedded-opentype'),
+    url('#{$iranSansFontPath}/IRANSansWeb_Light.woff2') format('woff2'),
+    url('#{$iranSansFontPath}/IRANSansWeb_Light.woff') format('woff'),
+    url('#{$iranSansFontPath}/IRANSansWeb_Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: IRANSans;
+  font-style: normal;
+  font-weight: 200;
+  src: url('#{$iranSansFontPath}/IRANSansWeb_UltraLight.eot');
+  src: url('#{$iranSansFontPath}/IRANSansWeb_UltraLight.eot?#iefix') format('embedded-opentype'),
+    url('#{$iranSansFontPath}/IRANSansWeb_UltraLight.woff2') format('woff2'),
+    url('#{$iranSansFontPath}/IRANSansWeb_UltraLight.woff') format('woff'),
+    url('#{$iranSansFontPath}/IRANSansWeb_UltraLight.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: IRANSans;
+  font-style: normal;
+  font-weight: normal;
+  src: url('#{$iranSansFontPath}/IRANSansWeb.eot');
+  src: url('#{$iranSansFontPath}/IRANSansWeb.eot?#iefix') format('embedded-opentype'),
+    url('#{$iranSansFontPath}/IRANSansWeb.woff2') format('woff2'),
+    url('#{$iranSansFontPath}/IRANSansWeb.woff') format('woff'),
+    url('#{$iranSansFontPath}/IRANSansWeb.ttf') format('truetype');
+}
+/******************
+******************/
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin custom-scrollbar($targetElement, $track, $scrollbar, $thumb) {
+  #{$targetElement}::-webkit-scrollbar-track {
+    background-color: $track;
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  #{$targetElement}::-webkit-scrollbar {
+    background-color: $scrollbar;
+    height: 6px;
+    width: 6px;
+  }
+  #{$targetElement}::-webkit-scrollbar-thumb {
+    background-color: $thumb;
+  }
+}
+
+@mixin form-action-btn() {
+  display: flex;
+  justify-content: flex-end;
+  >button:not(:last-child),
+  dpk-p-button:not(:last-child) {
+    margin-left: .5rem;
+  }
+}
+/******************
+******************/
+$buttonPadding: .5rem 1rem;
+$buttonIconOnlyWidth: 2.357rem;
+$buttonIconOnlyPadding: .5rem 0;
+$buttonBg: $primaryColor;
+$buttonTextColor: $primaryTextColor;
+$buttonBorder: 1px solid $primaryColor;
+$buttonHoverBg: $primaryDarkColor;
+$buttonTextHoverColor: $primaryTextColor;
+$buttonHoverBorderColor: $primaryDarkColor;
+$buttonActiveBg: $primaryDarkerColor;
+$buttonTextActiveColor: $primaryTextColor;
+$buttonActiveBorderColor: $primaryDarkerColor;
+$raisedButtonShadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2),
+  0px 2px 2px 0px rgba(0, 0, 0, 0.14),
+  0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+$roundedButtonBorderRadius: 2rem;
+$textButtonHoverBgOpacity: .04;
+$textButtonActiveBgOpacity: .16;
+$outlinedButtonBorder: 1px solid;
+$plainButtonTextColor: #6c757d;
+$plainButtonHoverBgColor: #e9ecef;
+$plainButtonActiveBgColor: #dee2e6;
+$secondaryButtonBg: #607D8B;
+$secondaryButtonTextColor: #ffffff;
+$secondaryButtonBorder: 1px solid #607D8B;
+$secondaryButtonHoverBg: #546E7A;
+$secondaryButtonTextHoverColor: #ffffff;
+$secondaryButtonHoverBorderColor: #546E7A;
+$secondaryButtonActiveBg: #455A64;
+$secondaryButtonTextActiveColor: #ffffff;
+$secondaryButtonActiveBorderColor: #455A64;
+$secondaryButtonFocusShadow: 0 0 0 0.2rem #B0BEC5;
+
+// ... (باقی دکمه‌ها مثل info, success, warning, help, danger)
+/******************
+******************/
+$tableHeaderBorder: 1px solid #e9ecef;
+$tableHeaderBorderWidth: 0 0 1px 0;
+$tableHeaderBg: #f8f9fa;
+$tableHeaderTextColor: $textColor;
+$tableHeaderFontWeight: 600;
+$tableHeaderPadding: 1rem 1rem;
+$tableHeaderCellPadding: 1rem 1rem;
+$tableHeaderCellBg: #f8f9fa;
+$tableHeaderCellTextColor: $textColor;
+$tableHeaderCellFontWeight: 600;
+$tableHeaderCellBorder: 1px solid #e9ecef;
+$tableHeaderCellBorderWidth: 0 0 1px 0;
+$tableHeaderCellHoverBg: #e9ecef;
+$tableHeaderCellTextHoverColor: $textColor;
+$tableHeaderCellIconColor: $textSecondaryColor;
+$tableHeaderCellIconHoverColor: $textSecondaryColor;
+$tableHeaderCellHighlightBg: #f8f9fa;
+$tableHeaderCellHighlightTextColor: $primaryColor;
+$tableHeaderCellHighlightHoverBg: #e9ecef;
+$tableHeaderCellHighlightTextHoverColor: $primaryColor;
+$tableSortableColumnBadgeSize: 1.143rem;
+
+$tableBodyRowBg: #ffffff;
+$tableBodyRowTextColor: $textColor;
+$tableBodyRowEvenBg: #ffffff;
+$tableBodyRowHoverBg: #e9ecef;
+$tableBodyRowTextHoverColor: $textColor;
+$tableBodyCellBorder: 1px solid rgba(0, 0, 0, 0.08);
+$tableBodyCellBorderWidth: 0 0 1px 0;
+$tableBodyCellPadding: 1rem 1rem;
+$tableFooterCellPadding: 1rem 1rem;
+$tableFooterCellBg: #f8f9fa;
+$tableFooterCellTextColor: $textColor;
+$tableFooterCellFontWeight: 600;
+$tableFooterCellBorder: 1px solid #e9ecef;
+$tableFooterCellBorderWidth: 0 0 1px 0;
+$tableResizerHelperBg: $primaryColor;
+/******************
+******************/
+$inputPadding: .3125rem .3125rem;
+$inputBg: #ffffff;
+$inputTextFontSize: 1rem;
+$inputTextColor: $textColor;
+$inputIconColor: $textColor;
+$inputBorder: 1px solid #a6a6a6;
+$inputHoverBorderColor: $primaryColor;
+$inputFocusBorderColor: #8dcdff;
+$inputErrorBorderColor: #ced4da #ced4da #ced4da $errorColor;
+$inputPlaceholderTextColor: #6c757d;
+$inputFilledBg: #f8f9fa;
+$inputFilledHoverBg: #f8f9fa;
+$inputFilledFocusBg: #f8f9fa;
+$inputGroupBg: #e9ecef;
+$inputGroupTextColor: $textSecondaryColor;
+$inputGroupAddOnMinWidth: 2.357rem;
+$inputListBg: #ffffff;
+$inputListTextColor: $textColor;
+$inputListBorder: $inputBorder;
+$inputListPadding: .5rem 0;
+$inputListItemPadding: .5rem 1rem;
+$inputListItemBg: transparent;
+$inputListItemTextColor: $textColor;
+$inputListItemHoverBg: #e9ecef;
+$inputListItemTextHoverColor: $textColor;
+$inputListItemBorder: 0 none;
+$inputListItemBorderRadius: 0;
+$inputListItemMargin: 0;
+$inputListItemFocusShadow: inset 0 0 0 0.15rem $focusOutlineColor;
+$inputListHeaderPadding: .5rem 1rem;
+$inputListHeaderMargin: 0;
+$inputListHeaderBg: #f8f9fa;
+$inputListHeaderTextColor: $textColor;
+$inputListHeaderBorder: 0 none;
+/******************
+******************/
+$checkboxWidth: 20px;
+$checkboxHeight: 20px;
+$checkboxBorder: 2px solid #ced4da;
+$checkboxIconFontSize: 14px;
+$checkboxActiveBorderColor: $primaryColor;
+$checkboxActiveBg: $primaryColor;
+$checkboxIconActiveColor: $primaryTextColor;
+$checkboxActiveHoverBg: $primaryDarkerColor;
+$checkboxIconActiveHoverColor: $primaryTextColor;
+$checkboxActiveHoverBorderColor: $primaryDarkerColor;
+
+$radiobuttonWidth: 20px;
+$radiobuttonHeight: 20px;
+$radiobuttonBorder: 2px solid #ced4da;
+$radiobuttonIconSize: 12px;
+$radiobuttonActiveBorderColor: $primaryColor;
+$radiobuttonActiveBg: $primaryColor;
+$radiobuttonIconActiveColor: $primaryTextColor;
+$radiobuttonActiveHoverBg: $primaryDarkerColor;
+$radiobuttonIconActiveHoverColor: $primaryTextColor;
+$radiobuttonActiveHoverBorderColor: $primaryDarkerColor;
+
+$ratingIconFontSize: 1.143rem;
+$ratingCancelIconColor: #e74c3c;
+$ratingCancelIconHoverColor: #c0392b;
+$ratingStarIconOffColor: $textColor;
+$ratingStarIconOnColor: $primaryColor;
+$ratingStarIconHoverColor: $primaryColor;
+
+$sliderBg: #dee2e6;
+$sliderBorder: 0 none;
+$sliderHorizontalHeight: .286rem;
+$sliderVerticalWidth: 0.286rem;
+$sliderHandleWidth: 1.143rem;
+$sliderHandleHeight: 1.143rem;
+$sliderHandleBg:
+/******************
+******************/
+$sliderHandleBorder: 2px solid $primaryColor;
+$sliderHandleBorderRadius: 50%;
+$sliderHandleHoverBorderColor: $primaryColor;
+$sliderHandleHoverBg: $primaryColor;
+$sliderRangeBg: $primaryColor;
+
+// ت
+/******************
+******************/
+$sliderHandleBorder: 2px solid $primaryColor;
+$sliderHandleBorderRadius: 50%;
+$sliderHandleHoverBorderColor: $primaryColor;
+$sliderHandleHoverBg: $primaryColor;
+$sliderRangeBg: $primaryColor;
+
+// تعریف انیمیشن اسلایدر
+@keyframes slider-thumb-hover {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+/******************
+******************/
+$calendarTableMargin: .5rem 0;
+$calendarPadding: .5rem;
+$calendarBg: #ffffff;
+$calendarInlineBg: $calendarBg;
+
+.dp-calendar-nav-container .dp-nav-header-btn,
+.dp-calendar-wrapper .dp-calendar-day,
+.dp-calendar-wrapper .dp-calendar-month {
+  font-family: var(--font-family);
+}
+
+dp-day-calendar.dp-material {
+  .dp-selected {
+    background-color: var(--primary-color) !important;
+  }
+  .dp-current-day {
+    border-color: var(--primary-darkcolor) !important;
+  }
+}
+
+dp-time-select {
+  .dp-time-select-controls {
+    direction: ltr;
+    padding: 0 4px;
+  }
+
+  &.dp-material .dp-time-select-control-up,
+  &.dp-material .dp-time-select-control-down {
+    height: 20px;
+    width: 20px;
+  }
+
+  &.dp-material .dp-time-select-control-up:before {
+    top: 0;
+  }
+
+  &.dp-material .dp-time-select-control-down::before {
+    top: -2px;
+  }
+}
+/******************
+******************/
+dp-date-picker {
+  .p-fluid & {
+    width: 100%;
+  }
+
+  .dp-picker-input {
+    color: $inputTextColor;
+    background: $inputBg;
+    padding: $inputPadding;
+    border: var(--input-border);
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+    appearance: none;
+    border-radius: var(--border-radius);
+
+    font-size: .8125rem !important;
+    font-weight: normal !important;
+    height: auto !important;
+    width: auto !important;
+
+    .p-fluid & {
+      width: 100% !important;
+    }
+
+    &:enabled:hover {
+      border-color: var(--primary-color);
+    }
+
+    &:enabled:focus {
+      outline: 0 none;
+      outline-offset: 0;
+      box-shadow: 0 0 0 .125rem #8dcdff;
+      border-color: var(--primary-color);
+    }
+  }
+}
+/******************
+******************/
+.dpk-table {
+  --tbl-header-footer: #f1f1f1;
+  background-color: var(--tbl-header-footer);
+  border-collapse: collapse;
+  width: 100%;
+
+  th,
+  td {
+    border: 1px solid #e9ecef;
+    border-width: 0 0 1px 0;
+    color: #444;
+    padding: .5rem 1rem;
+    text-align: right;
+  }
+
+  thead tr th,
+  tfoot tr {
+    background-color: var(--tbl-header-footer);
+  }
+
+  thead tr {
+    th {
+      font-weight: 600;
+    }
+  }
+
+  tbody tr {
+    background-color: #fff;
+
+    &.is-changed {
+      background-color: #fffada;
+    }
+  }
+
+  &.dpk-table-gridlines {
+    th {
+      border-width: 1px;
+    }
+
+    td {
+      border-width: 0 1px 1px 1px;
+    }
+  }
+
+  &.dpk-table-striped {
+    tr:nth-child(2n) {
+      background-color: #fcfcfc;
+    }
+  }
+
+  &.dpk-table-row-hover {
+    tbody tr:hover {
+      background-color: #e9ecef;
+    }
+  }
+
+  &.dpk-table-sticky {
+    tbody {
+      display: block;
+      max-height: 288px;
+      overflow-y: scroll;
+
+      @include custom-scrollbar("&", #f5f5f5, #f5f5f5, #777);
+    }
+
+    thead,
+    tfoot,
+    tbody tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+
+    thead,
+    tfoot {
+      width: calc(100% - 6px); // remove scrollbar width
+    }
+  }
+
+  .p-inputtext {
+    padding-top: .1875rem;
+    padding-bottom: .1875rem;
+  }
+}
+/******************
+******************/
+.paginatorBg: #ffffff;
+$paginatorTextColor: $textSecondaryColor;
+$paginatorBorder: solid #e9ecef;
+$paginatorBorderWidth: 0;
+$paginatorPadding: .5rem 1rem;
+$paginatorElementWidth: $buttonIconOnlyWidth;
+$paginatorElementHeight: $buttonIconOnlyWidth;
+$paginatorElementBg: transparent;
+$paginatorElementBorder: 0 none;
+$paginatorElementIconColor: $textSecondaryColor;
+$paginatorElementHoverBg: #e9ecef;
+$paginatorElementHoverBorderColor: transparent;
+$paginatorElementIconHoverColor: $textSecondaryColor;
+$paginatorElementBorderRadius: $borderRadius;
+$paginatorElementMargin: .143rem;
+$paginatorElementPadding: 0;
+/******************
+******************/
+.page-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.3125rem;
+
+  h4 {
+    color: #444;
+    font-size: 14px;
+    font-weight: 500;
+
+    i {
+      font-size: 12px;
+      font-weight: 400;
+    }
+  }
+}
+
+.p-field-checkbox > label,
+.p-field-radiobutton > label {
+  margin-right: .5rem;
+  margin-left: 0;
+}
+
+label + textarea {
+  display: block;
+}
+
+.table-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+/******************
+******************/
+
